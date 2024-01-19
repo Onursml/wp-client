@@ -57,5 +57,5 @@ function kelimeleriAltCizgiIleAl(girisMetni) {
     var yeniMetin = kelimeler.map(function(kelime) {
         return "_" + kelime + "_";
     }).join(" ");
-    return yeniMetin;
+    return yeniMetin; 
 }

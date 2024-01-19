@@ -1,4 +1,5 @@
-
+import { allowchat } from "./commands.js";
+import { state } from "./commands.js";
  
  
  export  function newFunction(msg,client) {
@@ -11,7 +12,7 @@
 }
 
 
-export function modChange(msg,client,state) {
+export function modChange(msg) {
  
     const update=msg.body.split(' ')[1];
 
@@ -19,18 +20,16 @@ export function modChange(msg,client,state) {
         state.mod = update;
         msg.reply('Mod güncellendi: ' + state.mod);
     
+    }else {
+        msg.reply(state.mod);
     }
 
 }
 
 
-export function chatEkle(msg,allowchat) {
-    const number = msg.body.split(' ')[1];
-    const ad = msg.body.split(' ')[2];
-    const seri = '90' + number + "@c.us";
-    allowchat.push({ serialized: seri, ad: ad, chat: true, lastmsg: new Date() });
-    msg.reply('chat eklendi');
-    console.log(allowchat);
+export function chatEkle(msg) {
+
+   
 }
  
 

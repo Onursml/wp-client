@@ -1,10 +1,14 @@
 import  pkk  from 'qrcode-terminal';
 
 import pkg from 'whatsapp-web.js';
+
+import { Gamestart } from './game.js';
+import {gamelog} from './contain.js'
 const qrcode =pkk
-const { Client, LocalAuth } = pkg;
-import{ chatEkle,modChange,} from './funcions.js';
-import {  main } from './openia.js';
+const { Client, LocalAuth, } = pkg;
+import { Commannds,MassageEvent }  from './commands.js';
+import { MsgListen } from './msgListen.js';
+
 
 const client = new Client({
     authStrategy: new LocalAuth(),
@@ -30,17 +34,27 @@ const user =[
     {ad:"halil"},
     {ad:"zeynep"}
 ]
- export let state ={
-    mod:2
- }
 
- export let allowchat=[
-    { serialized:"905523000252@c.us", ad:"onur", chat:true,
-lastmsg : new Date() },
 
- ]
+ 
 
- export let gbtmgs=[]
+client.on('message', async (msg) => {
+  if(false){
+    const chat= await msg.getChat() 
+   MsgListen(msg,client,chat)
+   }
+  
+
+});
+
+client.on('message_revoke_everyone', async (after, before) => {
+  const chat= await before.getChat() 
+  console.log(after); // message after it was deleted.
+  if (before) {
+    MsgListen(before,client,chat) // message before it was deleted.
+  }
+});
+ 
 
 
 client.on('message_create', async  (msg) => {
@@ -48,41 +62,32 @@ client.on('message_create', async  (msg) => {
     const chat= await msg.getChat()
   
     
-    // Fired on all message creations, including your own
+
     if (msg.fromMe) {
 
-        if (msg.body == 'TEST') {
-            // Send a new message as a reply to the current one
-            msg.reply('TEST ÇALIŞIYOR');
-            console.log(msg.from);
-        
-        }
-     
-     else if (msg.body.startsWith('!get')) {
-    
-    }
-  
-
-
-    else if (msg.body.startsWith('!mod')) {
-        modChange(msg,client,state); }
-
-    else if (msg.body.startsWith('!chatekle')) {
-        chatEkle(msg,allowchat);
-
-  
-    }
-
-    else if (msg.body.startsWith('!')) {
-     main(msg) }
+    Commannds(msg,chat);
 }
- else if(!chat.isGroup){
-    if(state.mod==2){
-        main(msg)
-    }
+  if(!chat.isGroup){
+   // MassageEvent(msg,chat)
  }
 
 
+ if(chat.isGroup ){
+   Gamestart(msg,chat,client)
+  
+
+   
+ }
+ if(msg.body.startsWith('/anket')){
+  
+  
+ }
+ 
+
+
+
+
+    
 });
 
 client.initialize();
