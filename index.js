@@ -60,6 +60,9 @@ client.on('message', async (msg) => {
   if (msg.body == 'Fener'&& !chat.isGroup) {
     msg.reply('fener şampiii');
   }
+  else if(msg.body == 'Cengiz'&& !chat.isGroup){
+    msg.reply('Undertaker');
+  }
 
   if(mods.afk && !chat.isGroup){
    msg.reply('Şuan mesgulüm, size geri döneceğim')
