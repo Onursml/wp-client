@@ -10,7 +10,7 @@ export function MsgListen(before, client, chat) {
     const datap = `Bir Mesaj Sildiğini fark ettim üzgünüm bunu onurun öğrenmesi gerekiyor :) \n *Silinen Mesaj:* ${before.body} `;
 
    if(chat.isGroup){
-    client.sendMessage(logİd, data);
+    client.sendMessage(logİd.id, data);
    }else {client.sendMessage(before.from, datap)}
 
 

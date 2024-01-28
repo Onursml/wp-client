@@ -1,5 +1,9 @@
-import { allowchat } from "./commands.js";
+
 import { state } from "./commands.js";
+import {mods } from "./contain.js";
+
+
+
  
  
  export  function newFunction(msg,client) {
@@ -27,9 +31,10 @@ export function modChange(msg) {
 }
 
 
-export function chatEkle(msg) {
+export function afkModChange(msg) {
+mods.afk=!mods.afk
+    msg.reply(`afk mod değiştirildi ${mods.afk}`);
 
-   
 }
  
 

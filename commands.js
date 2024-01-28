@@ -1,20 +1,26 @@
-import { modChange,chatEkle} from "./funcions.js";
+import { logİd } from "./contain.js";
+import { afkModChange} from "./funcions.js";
 
 export let allowchat=[]
 export let state ={
     mod:2
  }
+ 
 
 
 
- export function Commannds(msg,chat) {
+ export function Commannds(msg,chat,client) {
+  
     if (msg.body.startsWith('.mod')) {
-        modChange(msg);
+      
     }
 
-    else if (msg.body.startsWith('.chatekle')) {
-        chatEkle(msg);
+    else if (msg.body.startsWith('.afk')) {
+        msg.delete()
+        afkModChange(msg);
+       
 
+       
 
     }
 

@@ -3,10 +3,10 @@ import  pkk  from 'qrcode-terminal';
 import pkg from 'whatsapp-web.js';
 
 import { Gamestart } from './game.js';
-import {gamelog} from './contain.js'
+import {logİd, mods} from './contain.js'
 const qrcode =pkk
 const { Client, LocalAuth, } = pkg;
-import { Commannds,MassageEvent }  from './commands.js';
+import { Commannds }  from './commands.js';
 import { MsgListen } from './msgListen.js';
 
 
@@ -21,9 +21,26 @@ client.on('qr', qr => {
     qrcode.generate(qr, {small: true});
 });
 
-client.on('ready', () => {
-    console.log('Client is ready!');
-    
+client.on('ready',async () => {
+
+console.log('ready')
+
+const groupName = 'Log';
+const existingGroups = await client.getChats();
+const existingGroup = existingGroups.find(group => group.name == groupName);
+
+if (existingGroup) {
+    console.log(`"log" adında bir grup zaten mevcut.`);
+    logİd.id = existingGroup.id._serialized;
+} else {
+    console.log(`"log" adında bir grup bulunamadı. Yeni bir grup oluşturuluyor...`);
+    const participantsToAdd = ['905523000252@c.us']; // Gruba eklemek istediğiniz kişilerin numaralarını buraya ekleyin
+    const result = await client.createGroup('log', participantsToAdd);
+    console.log(result);
+
+}
+
+
     
   
   
@@ -39,9 +56,14 @@ const user =[
  
 
 client.on('message', async (msg) => {
-  if(false){
-    const chat= await msg.getChat() 
-   MsgListen(msg,client,chat)
+  const chat = await msg.getChat()
+  if (msg.body == 'Fener'&& !chat.isGroup) {
+    msg.reply('fener şampiii');
+  }
+
+  if(mods.afk && !chat.isGroup){
+   msg.reply('Şuan mesgulüm, size geri döneceğim')
+
    }
   
 
@@ -64,8 +86,9 @@ client.on('message_create', async  (msg) => {
     
 
     if (msg.fromMe) {
+      
 
-    Commannds(msg,chat);
+    Commannds(msg,chat,client);
 }
   if(!chat.isGroup){
    // MassageEvent(msg,chat)
@@ -77,10 +100,6 @@ client.on('message_create', async  (msg) => {
   
 
    
- }
- if(msg.body.startsWith('/anket')){
-  
-  
  }
  
 

@@ -9,4 +9,6 @@ export let gamelog ={game:0,alımlar:false ,chat:'',oyuncular:[
 
 
 
-export const logİd='120363206774886042@g.us'
+export const logİd={id:null}
+
+export let mods = {afk:false}
