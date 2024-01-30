@@ -39,3 +39,15 @@ mods.afk=!mods.afk
  
 
 
+export function info(msg) {
+    const infoText = `
+Kullanılabilir Komutlar:
+------------------------
+
+.afk: AFK modunu etkinleştirir ve gerekli işlemleri gerçekleştirir.
+.test: Sadece test için kullanılan bir komuttur.
+.listenözel: Özel mesaj dinleme modunu değiştirir.
+.ali: Ali modunu değiştirir.
+`;
+    msg.reply(infoText);
+}

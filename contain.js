@@ -11,4 +11,4 @@ export let gamelog ={game:0,alımlar:false ,chat:'',oyuncular:[
 
 export const logİd={id:null}
 
-export let mods = {afk:false}
+export let mods = {afk:false, listenmsgözel:false ,ali:false , isim:'isimsiz'}

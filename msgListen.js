@@ -1,4 +1,4 @@
-import { logİd } from "./contain.js";
+import { logİd, mods } from "./contain.js";
 
 
 
@@ -6,12 +6,16 @@ export function MsgListen(before, client, chat) {
 
 
 
-    const data = `*mesaj atan:* ${before.id.participant} \n *Silinen Mesaj:* ${before.body} \n ${!chat.isGroup ? '' : `*Grup:* ${chat.name}`}`;
-    const datap = `Bir Mesaj Sildiğini fark ettim üzgünüm :) \n *Silinen Mesaj:* ${before.body} `;
-
+    const data = `*mesaj atan:* ${before.from} \n *Silinen Mesaj:* ${before.body} \n ${!chat.isGroup ? '' : `*Grup:* ${chat.name}`}`;
+    const datap = `Bir Mesaj Sildiğini fark ettim üzgünüm bunu ${mods.isim} öğrenecek :) \n *Silinen Mesaj:* ${before.body} `;
+   console.log(before)
    if(chat.isGroup){
     client.sendMessage(logİd.id, data);
-   }else {client.sendMessage(before.from, datap)}
+   }else if (!chat.isGroup&&mods.listenmsgözel) {
+    client.sendMessage(before.from, datap);
+   }else{
+    client.sendMessage(logİd.id, data);
+   }
 
 
     

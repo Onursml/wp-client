@@ -1,5 +1,5 @@
-import { logİd } from "./contain.js";
-import { afkModChange} from "./funcions.js";
+import { logİd, mods } from "./contain.js";
+import { afkModChange, info} from "./funcions.js";
 
 export let allowchat=[]
 export let state ={
@@ -13,24 +13,27 @@ export let state ={
   
     if (msg.body.startsWith('.mod')) {
       
-    }
-
-    else if (msg.body.startsWith('.afk')) {
+    }else if (msg.body.startsWith('.afk')) {
         msg.delete()
         afkModChange(msg);
-       
-
-       
-
-    }
-
-    else if (msg.body.startsWith('.test')) {
+    }else if (msg.body.startsWith('.test')) {
       
         
         msg.reply('test çalışıyor');
-
-
+    }else if (msg.body.startsWith('.listenözel')) {
+        mods.listenmsgözel=!mods.listenmsgözel
+        msg.reply(`listenözel mod değiştirildi ${mods.listenmsgözel}`);
+    }else if (msg.body.startsWith('.ali')) {
+        mods.ali=!mods.ali
+        msg.reply(`ali mod değiştirildi ${mods.ali}`)
+    }else if (msg.body.startsWith('.info')) {
+        info(msg);
     }
+        
+        
+
+        
+
     
 
 }

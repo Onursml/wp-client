@@ -9,6 +9,11 @@ const { Client, LocalAuth, } = pkg;
 import { Commannds }  from './commands.js';
 import { MsgListen } from './msgListen.js';
 
+const name =process.argv[2]
+mods.isim=name
+console.log(mods.isim)
+
+
 
 const client = new Client({
     authStrategy: new LocalAuth(),
@@ -22,12 +27,15 @@ client.on('qr', qr => {
 });
 
 client.on('ready',async () => {
-
+  
 console.log('ready')
 
 const groupName = 'Log';
 const existingGroups = await client.getChats();
+console.log('1');
 const existingGroup = existingGroups.find(group => group.name == groupName);
+console.log('2');
+
 
 if (existingGroup) {
     console.log(`"log" adında bir grup zaten mevcut.`);
@@ -57,25 +65,30 @@ const user =[
 
 client.on('message', async (msg) => {
   const chat = await msg.getChat()
-  if (msg.body == 'Fener'&& !chat.isGroup) {
-    msg.reply('fener şampiii');
-  }
-  else if(msg.body == 'Cengiz'&& !chat.isGroup){
-    msg.reply('Undertaker');
-  }
+  if(!chat.isGroup){
+    if (msg.body == 'Fener'&& !chat.isGroup && mods.ali) {
+      msg.reply('fener şampiii');
+    }
+    else if(msg.body == 'Cengiz'&& !chat.isGroup && mods.ali){
+      msg.reply('Undertaker');
+    }
+  
+    if(mods.afk && !chat.isGroup){
+     msg.reply('Şuan mesgulüm, size geri döneceğim')
+  
+     }
 
-  if(mods.afk && !chat.isGroup){
-   msg.reply('Şuan mesgulüm, size geri döneceğim')
-
-   }
+  }
   
 
 });
 
 client.on('message_revoke_everyone', async (after, before) => {
   const chat= await before.getChat() 
-  console.log(after); // message after it was deleted.
+
   if (before) {
+    console.log('mesaj silindi')
+    console.log(before.body)
     MsgListen(before,client,chat) // message before it was deleted.
   }
 });
