@@ -3,7 +3,7 @@ import { systemprompt } from "./contain.js";
 import 'dotenv/config'
 
 const openai = new OpenAI({
-    apiKey: process.env.open_key,
+    apiKey: process.env.open_key||process.argv[3]
 });
 
 // Kullanıcıları depolamak için bir nesne oluştur
@@ -21,13 +21,14 @@ export async function main(msg) {
   // Sistem mesajını ve kullanıcı mesajlarını içeren sohbet geçmişini oluştur
   const completeChatHistory = [
     { role: "system", content: systemprompt },
+    {role:"assistant",content:"merhaba ben bir asistanım size nasıl yardımcı olabilirim"},
     ...chatHistory
   ];
 
   // OpenAI API'ya sohbet geçmişini ileterek tamamlama yap
   const completion = await openai.chat.completions.create({
     messages: completeChatHistory,
-    model: "gpt-3.5-turbo",
+    model: "gpt-4-turbo-preview",
   
     
    
@@ -40,7 +41,7 @@ export async function main(msg) {
   // Yanıtı kullan
   const response = completion.choices[0].message.content;
 
-  msg.reply(kelimeleriAltCizgiIleAl(response));
+ msg.reply(`_${response}_\n*asistan*`);
 
 
 
@@ -51,11 +52,4 @@ export async function main(msg) {
   if (chatHistory.length > 20) {
     chatHistory = chatHistory.slice(-20);
   }
-}
-function kelimeleriAltCizgiIleAl(girisMetni) {
-    var kelimeler = girisMetni.split(" ");
-    var yeniMetin = kelimeler.map(function(kelime) {
-        return "_" + kelime + "_";
-    }).join(" ");
-    return yeniMetin; 
 }

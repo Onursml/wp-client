@@ -8,6 +8,7 @@ const qrcode =pkk
 const { Client, LocalAuth, } = pkg;
 import { Commannds }  from './commands.js';
 import { MsgListen } from './msgListen.js';
+import { afkMod } from './afkMod.js';
 
 const name =process.argv[2]
 mods.isim=name
@@ -74,7 +75,7 @@ client.on('message', async (msg) => {
     }
   
     if(mods.afk && !chat.isGroup){
-     msg.reply('Şuan mesgulüm, size geri döneceğim')
+   afkMod(msg.from,msg)
   
      }
 

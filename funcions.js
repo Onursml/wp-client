@@ -1,4 +1,5 @@
 
+import { AfkList, removeAfk } from "./afkMod.js";
 import { state } from "./commands.js";
 import {mods } from "./contain.js";
 
@@ -32,7 +33,19 @@ export function modChange(msg) {
 
 
 export function afkModChange(msg) {
+        // İlk kelimeyi boşluklara göre ayırarak al
+        let ilkKelime = msg.body.split(' ')[0];
+    
+        // İlk kelimenin uzunluğunu hesapla
+        let ilkKelimeUzunluk = ilkKelime.length;
+        
+        // İlk kelimeden sonraki tüm kelimeleri al
+        let sonrakiKelimeler = msg.body.substring(ilkKelimeUzunluk + 1);
 mods.afk=!mods.afk
+removeAfk()
+mods.whyAfk=sonrakiKelimeler
+console.log(mods)
+
     msg.reply(`afk mod değiştirildi ${mods.afk}`);
 
 }
