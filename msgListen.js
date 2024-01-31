@@ -6,7 +6,7 @@ export function MsgListen(before, client, chat) {
 
 
 
-    const data = `*mesaj atan:* ${before.from} \n *Silinen Mesaj:* ${before.body} \n ${!chat.isGroup ? '' : `*Grup:* ${chat.name}`}`;
+    const data = `*mesaj atan:* ${before.author||before.id.participant} \n *Silinen Mesaj:* ${before.body} \n ${!chat.isGroup ? '' : `*Grup:* ${chat.name}`}`;
     const datap = `Bir Mesaj Sildiğini fark ettim üzgünüm bunu ${mods.isim} öğrenecek :) \n *Silinen Mesaj:* ${before.body} `;
    console.log(before)
    if(chat.isGroup){

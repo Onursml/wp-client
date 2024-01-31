@@ -55,11 +55,7 @@ if (existingGroup) {
   
 });
 
-const user =[
-    {ad:"onur"},
-    {ad:"halil"},
-    {ad:"zeynep"}
-]
+
 
 
  

@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { systemprompt } from "./contain.js";
+import { mods, systemprompt } from "./contain.js";
 import 'dotenv/config'
 
 const openai = new OpenAI({
@@ -10,6 +10,7 @@ const openai = new OpenAI({
 const userChatHistories = {};
 
 export async function main(msg) {
+
   // Kullanıcıya özel sohbet geçmişini al veya oluştur
   const userId = msg.from;
   let chatHistory = userChatHistories[userId] || [];
@@ -17,10 +18,11 @@ export async function main(msg) {
   // Yeni kullanıcı mesajını sohbet geçmişine ekle
   const newUserMessage = { role: "user", content: msg.body };
   chatHistory.push(newUserMessage);
-
+ const newPROMT=`${systemprompt}
+ bilgiler:${mods.whyAfk} `
   // Sistem mesajını ve kullanıcı mesajlarını içeren sohbet geçmişini oluştur
   const completeChatHistory = [
-    { role: "system", content: systemprompt },
+    { role: "system", content: newPROMT },
     {role:"assistant",content:"merhaba ben bir asistanım size nasıl yardımcı olabilirim"},
     ...chatHistory
   ];
