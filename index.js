@@ -50,7 +50,7 @@ if (existingGroup) {
 }
 
 
-    
+    client.sendMessage(logİd.id, 'Bot aktif');
   
   
 });
