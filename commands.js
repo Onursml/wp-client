@@ -1,5 +1,8 @@
+import { updateDoc,doc } from "firebase/firestore";
+import { db } from "./firebase.js";
 import { logİd, mods } from "./contain.js";
 import { afkModChange, info} from "./funcions.js";
+import { removeAfk } from "./afkMod.js";
 
 export let allowchat=[]
 export let state ={
@@ -9,22 +12,38 @@ export let state ={
 
 
 
- export function Commannds(msg,chat,client) {
+ export async function Commannds(msg,chat,client) {
   
     if (msg.body.startsWith('.mod')) {
+        msg.reply(`
+        afk:${mods.afk}
+        özel:${mods.listenmsgözel}
+        ali:${mods.ali}
+        whyafk:${mods.whyAfk}`
+
+        )
       
     }else if (msg.body.startsWith('.afk')) {
         msg.delete()
-        afkModChange(msg);
+    
+       
+          afkModChange(msg)
     }else if (msg.body.startsWith('.test')) {
       
         
         msg.reply('test çalışıyor');
     }else if (msg.body.startsWith('.listenözel')) {
-        mods.listenmsgözel=!mods.listenmsgözel
+   
+        await updateDoc(doc(db, "onur", "whatsapp"), {
+            listenözel: !mods.listenmsgözel,
+    
+          });
         msg.reply(`listenözel mod değiştirildi ${mods.listenmsgözel}`);
     }else if (msg.body.startsWith('.ali')) {
-        mods.ali=!mods.ali
+        await updateDoc(doc(db, "onur", "whatsapp"), {
+            ali: !mods.ali,
+    
+          });
         msg.reply(`ali mod değiştirildi ${mods.ali}`)
     }else if (msg.body.startsWith('.info')) {
         info(msg);

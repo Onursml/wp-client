@@ -2,7 +2,7 @@ import  pkk  from 'qrcode-terminal';
 
 import pkg from 'whatsapp-web.js';
 
-import { Gamestart } from './game.js';
+
 import {logİd, mods} from './contain.js'
 const qrcode =pkk
 const { Client, LocalAuth, } = pkg;
@@ -108,12 +108,7 @@ client.on('message_create', async  (msg) => {
  }
 
 
- if(chat.isGroup ){
-   Gamestart(msg,chat,client)
-  
 
-   
- }
  
 
 

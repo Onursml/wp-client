@@ -1,4 +1,6 @@
 
+import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { db } from "./firebase.js";
 import { AfkList, removeAfk } from "./afkMod.js";
 import { state } from "./commands.js";
 import {mods } from "./contain.js";
@@ -32,7 +34,7 @@ export function modChange(msg) {
 }
 
 
-export function afkModChange(msg) {
+export async function afkModChange(msg) {
         // İlk kelimeyi boşluklara göre ayırarak al
         let ilkKelime = msg.body.split(' ')[0];
     
@@ -41,9 +43,15 @@ export function afkModChange(msg) {
         
         // İlk kelimeden sonraki tüm kelimeleri al
         let sonrakiKelimeler = msg.body.substring(ilkKelimeUzunluk + 1);
-mods.afk=!mods.afk
+        await updateDoc(doc(db, "onur", "whatsapp"), {
+            afk: !mods.afk,
+    
+          });
 removeAfk()
-mods.whyAfk=sonrakiKelimeler
+await updateDoc(doc(db, "onur", "whatsapp"), {
+    whyAfk: sonrakiKelimeler,
+})
+
 console.log(mods)
 
     msg.reply(`afk mod değiştirildi ${mods.afk}`);
