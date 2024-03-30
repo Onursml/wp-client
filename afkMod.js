@@ -31,7 +31,7 @@ export function afkMod(id,msg){
         try{ main(msg)}
         
     catch(e){console.log(e)}}
-    else if (afk.step !== undefined && afk.step > 7) {
+    else if (afk.step > 6) {
         msg.reply(`_${mods.isim} şuanda mesgul yapay zekayı çok fazla kullandığınız için şuan cevap vermiyor_ \n *Asistan*`)
         // 7'den büyük olduğunda yapılacak işlemler
     }
