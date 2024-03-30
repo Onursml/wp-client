@@ -1,3 +1,4 @@
+import { mods } from "./contain.js"
 import { main } from "./openia.js"
 
 export let AfkList=[
@@ -24,10 +25,16 @@ export function afkMod(id,msg){
      AfkList.push({id:id,step:1})   
      console.log(AfkList)
     }
-    else if(afk.step==1){ 
+    else if(afk.step >= 1 && afk.step <= 6){ 
+        afk.step=afk.step+1
         
         try{ main(msg)}
+        
     catch(e){console.log(e)}}
+    else if (afk.step !== undefined && afk.step > 7) {
+        msg.reply(`_${mods.isim} şuanda mesgul yapay zekayı çok fazla kullandığınız için şuan cevap vermiyor_ \n *Asistan*`)
+        // 7'den büyük olduğunda yapılacak işlemler
+    }
 
   
  

@@ -72,3 +72,5 @@ Kullanılabilir Komutlar:
 `;
     msg.reply(infoText);
 }
+
+

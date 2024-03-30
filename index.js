@@ -104,7 +104,7 @@ client.on('message_create', async  (msg) => {
     Commannds(msg,chat,client);
 }
   if(!chat.isGroup){
-   // MassageEvent(msg,chat)
+ 
  }
 
 
