@@ -5,7 +5,7 @@ import pkg from 'whatsapp-web.js';
 
 import {logİd, mods} from './contain.js'
 const qrcode =pkk
-const { Client, LocalAuth, } = pkg;
+const { Client, NoAuth, } = pkg;
 import { Commannds }  from './commands.js';
 import { MsgListen } from './msgListen.js';
 import { afkMod } from './afkMod.js';
@@ -17,7 +17,7 @@ console.log(mods.isim)
 
 
 const client = new Client({
-    authStrategy: new LocalAuth(),
+    authStrategy: new NoAuth(),
     puppeteer: {
 		args: ['--no-sandbox'],
 	}
